@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Upskill Program — TranZact 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#06080a;--surface:#0d1117;--surface2:#161b22;--border:#21262d;--border2:#30363d;--green:#00d4aa;--green2:#00ffcc;--purple:#7c3aed;--purple2:#a78bfa;--orange:#f59e0b;--red:#ef4444;--blue:#3b82f6;--pink:#ec4899;--text:#e6edf3;--text2:#8b949e;--text3:#484f58}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+.page{max-width:860px;margin:0 auto;padding:0 2rem 4rem}
+
+/* ===== HERO ===== */
+.hero{text-align:center;padding:5rem 2rem 4rem;position:relative}
+.hero::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(124,58,237,0.08) 0%,rgba(0,212,170,0.04) 40%,transparent 70%);pointer-events:none}
+.badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:0.7rem;font-weight:700;color:var(--green);background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.2);border-radius:20px;padding:6px 16px;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.5rem}
+.hero h1{font-size:3rem;font-weight:900;line-height:1.1;margin-bottom:1rem}
+.hero h1 .gr1{background:linear-gradient(135deg,var(--green),var(--green2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1 .gr2{background:linear-gradient(135deg,var(--purple),var(--purple2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-sub{font-size:1.1rem;color:var(--text2);max-width:600px;margin:0 auto 2rem;line-height:1.8}
+.hero-sub strong{color:var(--text)}
+.hero-stats{display:flex;justify-content:center;gap:3rem;margin-top:2.5rem}
+.stat{text-align:center}
+.stat-num{font-family:'JetBrains Mono',monospace;font-size:1.8rem;font-weight:800;color:var(--green)}
+.stat-lbl{font-size:0.7rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em;margin-top:2px}
+
+/* ===== SECTIONS ===== */
+.section{padding:3rem 0;border-top:1px solid var(--border)}
+.section-tag{font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;color:var(--purple2);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.5rem}
+.section h2{font-size:1.6rem;font-weight:800;color:#fff;margin-bottom:0.5rem}
+.section-intro{font-size:0.95rem;color:var(--text2);margin-bottom:1.5rem;max-width:650px}
+.section h3{font-size:0.85rem;font-weight:700;color:var(--text2);margin:2rem 0 0.8rem;text-transform:uppercase;letter-spacing:0.05em}
+
+/* ===== NARRATIVE ===== */
+.narrative{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:2rem 2.2rem;margin:1.5rem 0;position:relative;overflow:hidden}
+.narrative::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(180deg,var(--green),var(--purple))}
+.narrative p{font-size:0.95rem;color:var(--text2);margin-bottom:1rem;line-height:1.8}
+.narrative p:last-child{margin-bottom:0}
+.narrative strong{color:var(--text)}
+.narrative em{color:var(--green);font-style:normal;font-weight:600}
+
+/* ===== CARDS ===== */
+.card-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:1rem 0}
+.card-grid.two-col{grid-template-columns:repeat(2,1fr)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.5rem;transition:all 0.2s}
+.card:hover{border-color:var(--border2);transform:translateY(-1px)}
+.card-label{font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;color:var(--purple2);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px}
+.card p{font-size:0.9rem;color:var(--text2);line-height:1.6}
+.card .tag{display:inline-block;font-size:0.6rem;font-weight:700;padding:2px 8px;border-radius:4px;margin-top:8px;letter-spacing:0.05em}
+.tag-easy{background:rgba(0,212,170,0.1);color:var(--green)}
+.tag-med{background:rgba(245,158,11,0.1);color:var(--orange)}
+.tag-adv{background:rgba(124,58,237,0.1);color:var(--purple2)}
+
+/* ===== WEEK CARDS ===== */
+.week-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.8rem;margin:1rem 0;position:relative;overflow:hidden}
+.week-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+/* ===== TEAM CARDS ===== */
+.team-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.5rem 1.8rem;margin:1rem 0;position:relative;overflow:hidden}
+.team-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.tm-green::before{background:linear-gradient(90deg,var(--green),#00e6b8)}
+.tm-blue::before{background:linear-gradient(90deg,var(--blue),#60a5fa)}
+.tm-purple::before{background:linear-gradient(90deg,var(--purple),var(--purple2))}
+.tm-orange::before{background:linear-gradient(90deg,var(--orange),#fbbf24)}
+.tm-pink::before{background:linear-gradient(90deg,var(--pink),#f472b6)}
+.team-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem}
+.team-name{font-size:1.1rem;font-weight:800;color:#fff}
+.team-count{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text3);background:var(--surface2);padding:3px 10px;border-radius:6px}
+.team-depts{font-family:'JetBrains Mono',monospace;font-size:0.6rem;color:var(--green);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.8rem}
+.team-members{display:flex;flex-wrap:wrap;gap:6px}
+.member-chip{font-size:0.78rem;color:var(--text2);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px}
+
+.wk-green::before{background:linear-gradient(90deg,var(--green),#00e6b8)}
+.wk-blue::before{background:linear-gradient(90deg,var(--blue),#60a5fa)}
+.wk-purple::before{background:linear-gradient(90deg,var(--purple),var(--purple2))}
+.wk-orange::before{background:linear-gradient(90deg,var(--orange),#fbbf24)}
+.week-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem}
+.week-name{font-size:1.1rem;font-weight:800;color:#fff}
+.week-time{font-family:'JetBrains Mono',monospace;font-size:0.7rem;color:var(--text3);background:var(--surface2);padding:3px 10px;border-radius:6px}
+.week-theme{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--green);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.8rem}
+.week-desc{font-size:0.9rem;color:var(--text2);margin-bottom:0.8rem;line-height:1.7}
+.week-tasks{display:flex;flex-wrap:wrap;gap:6px}
+.task-chip{font-size:0.78rem;color:var(--text2);background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 10px}
+.week-outcome{font-size:0.8rem;color:var(--text3);margin-top:1rem;padding-top:0.8rem;border-top:1px solid var(--border)}
+.week-outcome strong{color:var(--green)}
+
+/* ===== TABLE ===== */
+.score-table{width:100%;border-collapse:separate;border-spacing:0;margin:1rem 0;font-size:0.85rem;border-radius:10px;overflow:hidden;border:1px solid var(--border)}
+.score-table th{text-align:left;padding:0.9rem 1.2rem;background:var(--surface2);color:var(--green);font-weight:700;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.08em}
+.score-table td{padding:0.9rem 1.2rem;border-top:1px solid var(--border);color:var(--text2)}
+.score-table tr:hover td{background:var(--surface)}
+
+/* ===== RULES ===== */
+.rule{display:flex;gap:1rem;margin:1rem 0;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;align-items:flex-start}
+.rule-icon{font-size:1.8rem;flex-shrink:0}
+.rule-title{font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:2px}
+.rule-desc{font-size:0.85rem;color:var(--text2)}
+
+/* ===== LISTS ===== */
+ul{list-style:none;padding:0}
+ul li{padding:0.4rem 0;padding-left:1.4rem;position:relative;font-size:0.9rem;color:var(--text2)}
+ul li::before{content:">";font-family:'JetBrains Mono',monospace;position:absolute;left:0;color:var(--green);font-weight:700;font-size:0.8rem}
+
+/* ===== QUOTE ===== */
+.quote-block{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:2.5rem 2.5rem;margin:2rem 0;text-align:center;position:relative}
+.quote-block::before{content:open-quote;font-size:4rem;color:var(--border2);position:absolute;top:0.5rem;left:1.5rem;font-family:Georgia,serif}
+.quote-text{font-size:1.2rem;font-weight:600;color:#fff;line-height:1.6;max-width:550px;margin:0 auto 1rem}
+.quote-text em{color:var(--green);font-style:normal}
+.quote-attr{font-size:0.75rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.1em}
+
+/* ===== CTA ===== */
+.cta-box{background:linear-gradient(135deg,rgba(0,212,170,0.06),rgba(124,58,237,0.06));border:1px solid rgba(0,212,170,0.2);border-radius:14px;padding:2rem 2.2rem;margin:1.5rem 0;text-align:center}
+.cta-box h3{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:0.5rem}
+.cta-box p{font-size:0.9rem;color:var(--text2);margin-bottom:1rem}
+.cta-link{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:0.85rem;font-weight:700;color:var(--bg);background:var(--green);padding:10px 24px;border-radius:8px;text-decoration:none;transition:all 0.2s}
+.cta-link:hover{background:var(--green2);transform:translateY(-1px)}
+
+/* ===== FOOTER ===== */
+.footer{text-align:center;padding:3rem 0 1rem;border-top:1px solid var(--border);margin-top:1rem}
+.footer-big{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:0.5rem}
+.footer-sub{font-size:0.85rem;color:var(--text3)}
+.footer-logo{font-family:'JetBrains Mono',monospace;font-size:0.65rem;color:var(--text3);margin-top:2rem;letter-spacing:0.15em;text-transform:uppercase}
+
+/* ===== SAMPLE PROBLEM ===== */
+.sample-problem{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.3rem 1.5rem;margin:0.5rem 0;transition:all 0.2s}
+.sample-problem:hover{border-color:var(--border2);transform:translateY(-1px)}
+.sample-role{font-family:'JetBrains Mono',monospace;font-size:0.6rem;font-weight:700;color:var(--green);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px}
+.sample-title{font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:4px}
+.sample-desc{font-size:0.85rem;color:var(--text2);line-height:1.6}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:600px){
+  .hero h1{font-size:2.2rem}
+  .hero-stats{gap:1.5rem}
+  .card-grid.two-col{grid-template-columns:1fr}
+  .page{padding:0 1.2rem 3rem}
+}
+
+/* ===== PRINT ===== */
+@media print{
+  body{background:#fff;color:#111}
+  .page{padding:1rem}
+  .hero::before{display:none}
+  .hero h1 .gr1,.hero h1 .gr2{-webkit-text-fill-color:#111;background:none}
+  .badge{color:#333;border-color:#ccc;background:#f5f5f5}
+  .narrative,.card,.week-card,.team-card,.rule,.quote-block,.cta-box,.sample-problem{background:#f9f9f9;border-color:#ddd}
+  .narrative::before,.week-card::before,.team-card::before{display:none}
+  .member-chip{background:#eee;border-color:#ddd;color:#333}
+  .section{border-top-color:#eee}
+  .section-tag,.card-label,.week-theme{color:#333}
+  .score-table th{background:#f0f0f0;color:#111;border-color:#ddd}
+  .score-table td,.score-table{border-color:#eee}
+  .task-chip{background:#eee;border-color:#ddd;color:#333}
+  ul li::before{color:#333}
+  .cta-link{background:#333;color:#fff}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- =========== HERO =========== -->
+<div class="hero">
+  <div class="badge">30-Day AI Upskill Program</div>
+  <h1><span class="gr1">Upskill</span> & Become <span class="gr2">AI Native</span></h1>
+  <p class="hero-sub">
+    Every person at TranZact will be AI-native in 30 days.<br>
+    <strong>Pick your own problem statement. Solve it with AI. No prior experience needed.</strong>
+  </p>
+  <div class="hero-stats">
+    <div class="stat"><div class="stat-num">44</div><div class="stat-lbl">Participants</div></div>
+    <div class="stat"><div class="stat-num">5</div><div class="stat-lbl">Squads</div></div>
+    <div class="stat"><div class="stat-num">30</div><div class="stat-lbl">Days</div></div>
+    <div class="stat"><div class="stat-num">10</div><div class="stat-lbl">Min/Day</div></div>
+  </div>
+</div>
+
+<!-- =========== THE WHY =========== -->
+<div class="section">
+  <div class="section-tag">00 — The Why</div>
+  <h2>AI isn't coming. It's already here. Are we ready?</h2>
+  <div class="narrative">
+    <p>Here's the uncomfortable truth: <strong>AI is already changing how our competitors work.</strong> While we debate whether to "explore AI," other companies are using it to write proposals in 5 minutes, resolve tickets before lunch, and prep demos that feel personalized — because they are.</p>
+    <p>But here's the good news: <strong>AI literacy isn't a talent. It's a skill.</strong> And like any skill, it can be learned through consistent, small practice.</p>
+    <p>That's why we're running the <em>AI Upskill Program</em> — a 30-day hands-on program where you pick a real problem from your daily work and solve it using AI tools like Claude, Codex, and ChatGPT. No generic exercises — <em>your problem, your solution, your growth.</em></p>
+    <p><strong>10 minutes a day. That's it.</strong> Each day builds on the last. By Day 30, you won't just "know about AI" — you'll have solved a real problem and become the AI-native professional that every team needs.</p>
+    <p>This isn't optional enthusiasm. This is <em>TranZact investing in every single person's future.</em></p>
+  </div>
+</div>
+
+<!-- =========== HOW IT WORKS =========== -->
+<div class="section">
+  <div class="section-tag">01 — How It Works</div>
+  <h2>Pick a problem. Solve it with AI. Become AI-native in 30 days.</h2>
+  <p class="section-intro">You'll choose a real problem statement from your daily work — something that takes too long, feels repetitive, or could be smarter. Then you'll spend 30 days using AI to solve it, step by step.</p>
+
+  <div class="rule">
+    <div class="rule-icon">🎯</div>
+    <div>
+      <div class="rule-title">Platform: Claude Team 5K</div>
+      <div class="rule-desc">Everyone signs up and tracks progress on our dedicated platform. You'll log daily activities, track your problem statement progress, and see how your squad is doing. All in one place.</div>
+    </div>
+  </div>
+
+  <div class="rule">
+    <div class="rule-icon">⏱</div>
+    <div>
+      <div class="rule-title">10 Minutes a Day. Non-Negotiable.</div>
+      <div class="rule-desc">Before your first meeting. During chai. On the commute. We're not asking for hours — we're asking for the time it takes to scroll Instagram reels. Except this actually makes you better at your job.</div>
+    </div>
+  </div>
+
+  <div class="rule">
+    <div class="rule-icon">📈</div>
+    <div>
+      <div class="rule-title">Progressive Difficulty</div>
+      <div class="rule-desc">Week 1 is gentle — chatting with AI, asking better questions. By Week 4, you're building workflows, automating real tasks, and wondering how you ever worked without it.</div>
+    </div>
+  </div>
+
+  <div class="rule">
+    <div class="rule-icon">🤝</div>
+    <div>
+      <div class="rule-title">Learn Together. Share Wins.</div>
+      <div class="rule-desc">Weekly check-ins on Slack (#ai-mojo). Share what you built, what surprised you, what's working. The best learning happens when people compare notes.</div>
+    </div>
+  </div>
+</div>
+
+<!-- =========== THE 4-WEEK PLAN =========== -->
+<div class="section">
+  <div class="section-tag">02 — The 4-Week Journey</div>
+  <h2>From "What's a prompt?" to "I solved my problem with AI."</h2>
+  <p class="section-intro">Each week has a clear theme and builds on the last. You'll never feel lost — and you'll never feel bored.</p>
+
+  <div class="week-card wk-green">
+    <div class="week-header">
+      <div class="week-name">🌱 Week 1 — First Steps</div>
+      <div class="week-time">~10 min/day</div>
+    </div>
+    <div class="week-theme">Theme: Learn to talk to AI</div>
+    <div class="week-desc">You'll learn how to have a real conversation with AI — not just "write me an email" but structured prompts that give you genuinely useful output. By Friday, you'll be getting answers that feel like they came from a smart colleague, not a robot.</div>
+    <div class="week-tasks">
+      <span class="task-chip">Your first AI conversation</span>
+      <span class="task-chip">Writing better prompts</span>
+      <span class="task-chip">Giving AI context & role</span>
+      <span class="task-chip">Iterating on responses</span>
+      <span class="task-chip">Summarizing real documents</span>
+    </div>
+    <div class="week-outcome"><strong>Outcome:</strong> You can use AI to draft emails, summarize notes, brainstorm ideas, and get answers 10x faster than Googling.</div>
+  </div>
+
+  <div class="week-card wk-blue">
+    <div class="week-header">
+      <div class="week-name">🔧 Week 2 — Daily Workflows</div>
+      <div class="week-time">~10 min/day</div>
+    </div>
+    <div class="week-theme">Theme: Apply AI to your actual job</div>
+    <div class="week-desc">Now it gets real. You'll take your daily tasks — the ones you do every single day — and find where AI can cut the time in half. Sales reps will prep demos faster. CX folks will draft customer responses in seconds. Engineers will debug smarter.</div>
+    <div class="week-tasks">
+      <span class="task-chip">AI for emails & comms</span>
+      <span class="task-chip">Meeting prep & follow-ups</span>
+      <span class="task-chip">Data analysis with AI</span>
+      <span class="task-chip">Customer response drafting</span>
+      <span class="task-chip">Research & competitive intel</span>
+    </div>
+    <div class="week-outcome"><strong>Outcome:</strong> You've identified 3+ daily tasks where AI saves you real time. You're already faster than you were two weeks ago.</div>
+  </div>
+
+  <div class="week-card wk-purple">
+    <div class="week-header">
+      <div class="week-name">🚀 Week 3 — Build & Automate</div>
+      <div class="week-time">~10 min/day</div>
+    </div>
+    <div class="week-theme">Theme: From chatting to building</div>
+    <div class="week-desc">This is where the magic happens. You'll move beyond chatting with AI to actually building things — simple automations, connected workflows, tools that run while you sleep. No coding required. The program uses no-code tools that anyone can pick up.</div>
+    <div class="week-tasks">
+      <span class="task-chip">AI-powered templates</span>
+      <span class="task-chip">Simple automations</span>
+      <span class="task-chip">Connecting AI to your tools</span>
+      <span class="task-chip">Building reusable prompts</span>
+      <span class="task-chip">Creating AI assistants</span>
+    </div>
+    <div class="week-outcome"><strong>Outcome:</strong> You've built at least one automation that saves you time every week. You're not just using AI — you're building with it.</div>
+  </div>
+
+  <div class="week-card wk-orange">
+    <div class="week-header">
+      <div class="week-name">🏆 Week 4 — Level Up & Share</div>
+      <div class="week-time">~10 min/day</div>
+    </div>
+    <div class="week-theme">Theme: Showcase your problem statement solution</div>
+    <div class="week-desc">The final week is about completing your problem statement solution and sharing it with the team. You'll polish your AI workflow, document what you built, and present your "AI Win" — a real problem you solved using AI in your daily work.</div>
+    <div class="week-tasks">
+      <span class="task-chip">Advanced prompting</span>
+      <span class="task-chip">Multi-step AI workflows</span>
+      <span class="task-chip">Problem statement showcase</span>
+      <span class="task-chip">Your "AI Win" presentation</span>
+      <span class="task-chip">Building an AI habit</span>
+    </div>
+    <div class="week-outcome"><strong>Outcome:</strong> You've solved a real problem with AI and presented it to the team. You have a daily AI habit. You're now AI-native.</div>
+  </div>
+</div>
+
+<!-- =========== WHAT'S IN IT FOR YOU =========== -->
+<div class="section">
+  <div class="section-tag">03 — What's In It For You</div>
+  <h2>Upskill and become AI-native in 30 days — with your own problem statement.</h2>
+  <p class="section-intro">This isn't generic training. You pick a real problem from your daily work — something that frustrates you, takes too long, or could be 10x better with AI. Then you solve it. By Day 30, you'll have a working AI-powered solution and the skills to build more.</p>
+
+  <div class="narrative">
+    <p><strong>Why a problem statement?</strong> Because the best way to learn AI isn't theory — it's solving something you actually care about. When you pick your own problem, you're motivated. When you solve it, you're transformed.</p>
+    <p>Choose something from your daily work: a report that takes 2 hours, a process that's mostly copy-paste, customer queries you answer on repeat, data you wrangle manually. <em>If it's boring, repetitive, or slow — AI can probably help.</em></p>
+    <p><strong>By the end of 30 days, you'll have:</strong></p>
+    <p>✅ A working AI solution to a real problem in your role<br>
+    ✅ Hands-on experience with Claude, Codex & ChatGPT<br>
+    ✅ Confidence to apply AI to any new challenge<br>
+    ✅ A presentation-ready "AI Win" to share with the team</p>
+  </div>
+
+  <h3>💡 Sample Problem Statements — Pick One or Create Your Own</h3>
+
+  <div class="sample-problem">
+    <div class="sample-role">Sales</div>
+    <div class="sample-title">"I spend 45 mins researching every prospect before a demo call."</div>
+    <div class="sample-desc">Use AI to auto-research a prospect's company, industry, pain points, and generate a personalized talk track — in under 5 minutes.</div>
+  </div>
+
+  <div class="sample-problem">
+    <div class="sample-role">Customer Experience</div>
+    <div class="sample-title">"I answer the same 20 customer questions every week."</div>
+    <div class="sample-desc">Build an AI-powered response system that drafts accurate, context-aware replies to recurring queries — review and send in 30 seconds.</div>
+  </div>
+
+  <div class="sample-problem">
+    <div class="sample-role">Engineering</div>
+    <div class="sample-title">"Debugging production issues takes hours of log reading."</div>
+    <div class="sample-desc">Use AI to analyze error logs, identify root causes, suggest fixes, and even write the patch — turning hours into minutes.</div>
+  </div>
+
+  <div class="sample-problem">
+    <div class="sample-role">Product</div>
+    <div class="sample-title">"Writing PRDs and feature specs takes me an entire day."</div>
+    <div class="sample-desc">Use AI to generate structured PRDs from rough notes, user stories from conversations, and competitive analysis from URLs.</div>
+  </div>
+
+  <div class="sample-problem">
+    <div class="sample-role">Marketing</div>
+    <div class="sample-title">"Creating campaign copy variations is tedious and slow."</div>
+    <div class="sample-desc">Use AI to generate 10+ ad copy variations, A/B test headlines, and create social posts — all from a single brief.</div>
+  </div>
+
+  <div class="sample-problem">
+    <div class="sample-role">Operations / Finance</div>
+    <div class="sample-title">"Monthly reporting is a manual data-pull nightmare."</div>
+    <div class="sample-desc">Use AI to automate data extraction, summarize key metrics, flag anomalies, and draft the narrative — report-ready in minutes.</div>
+  </div>
+
+  <div class="sample-problem">
+    <div class="sample-role">Any Role</div>
+    <div class="sample-title">"Meeting notes and action items always fall through the cracks."</div>
+    <div class="sample-desc">Use AI to summarize meetings, extract action items with owners, draft follow-up emails, and track commitments automatically.</div>
+  </div>
+</div>
+
+<!-- =========== ACCOUNTABILITY =========== -->
+<div class="section">
+  <div class="section-tag">04 — Accountability</div>
+  <h2>We're tracking this. Gently, but firmly.</h2>
+  <p class="section-intro">This program only works if people actually do it. Here's how we make sure the whole team stays on track without turning it into homework.</p>
+
+  <div class="rule">
+    <div class="rule-icon">📊</div>
+    <div>
+      <div class="rule-title">Weekly Progress Check-ins</div>
+      <div class="rule-desc">Every Monday, a quick pulse on Slack: "What did you learn last week? What's one thing AI helped you do?" 2 sentences. That's it. Leaders will review completion.</div>
+    </div>
+  </div>
+
+  <div class="rule">
+    <div class="rule-icon">🏅</div>
+    <div>
+      <div class="rule-title">"AI Win of the Week" Spotlight</div>
+      <div class="rule-desc">Each week, we'll highlight the most creative or impactful use of AI by a team member. Featured in Slack + shoutout in All Hands. Small recognition, big motivation.</div>
+    </div>
+  </div>
+
+  <div class="rule">
+    <div class="rule-icon">👥</div>
+    <div>
+      <div class="rule-title">Learning Squads</div>
+      <div class="rule-desc">You've been placed in an 8–9 person cross-functional squad. These are your people for the next 30 days — share wins, help each other when stuck, and hold each other accountable. One daily check-in: "Did you do your 10 minutes?"</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:1.5rem;margin-bottom:0.5rem;font-size:0.9rem;color:#fff;text-transform:none;letter-spacing:0">🤝 Your 5 Squads</h3>
+  <p class="section-intro" style="margin-bottom:1rem">Cross-functional by design — every squad mixes departments so you learn how AI applies beyond your own role.</p>
+
+  <div class="team-card tm-green">
+    <div class="team-header">
+      <div class="team-name">⚡ Squad Spark</div>
+      <div class="team-count">9 members</div>
+    </div>
+    <div class="team-depts">CX + Engineering + Product + Sales</div>
+    <div class="team-members">
+      <span class="member-chip">Sumanth Gowda</span>
+      <span class="member-chip">Leo</span>
+      <span class="member-chip">Shailesh Jaiswal</span>
+      <span class="member-chip">Abhishek Tiwari</span>
+      <span class="member-chip">Vivian Biswas</span>
+      <span class="member-chip">Himanshu Jain</span>
+      <span class="member-chip">Shubham Singh</span>
+      <span class="member-chip">Himanshu Mishra</span>
+      <span class="member-chip">Sanket Patel</span>
+    </div>
+  </div>
+
+  <div class="team-card tm-blue">
+    <div class="team-header">
+      <div class="team-name">💜 Squad Pulse</div>
+      <div class="team-count">9 members</div>
+    </div>
+    <div class="team-depts">CX + Engineering + Sales</div>
+    <div class="team-members">
+      <span class="member-chip">Amruta Tivarekar</span>
+      <span class="member-chip">Deveshi Dwivedi</span>
+      <span class="member-chip">Meet Yadav</span>
+      <span class="member-chip">Jeet Popat</span>
+      <span class="member-chip">Suneet Choudhary</span>
+      <span class="member-chip">Sakshi Goyal</span>
+      <span class="member-chip">Akshata Yadav</span>
+      <span class="member-chip">Varun Ashok</span>
+      <span class="member-chip">Gaurav Yerunkar</span>
+    </div>
+  </div>
+
+  <div class="team-card tm-purple">
+    <div class="team-header">
+      <div class="team-name">🔄 Squad Flux</div>
+      <div class="team-count">9 members</div>
+    </div>
+    <div class="team-depts">CX + Channel + Engineering + Sales</div>
+    <div class="team-members">
+      <span class="member-chip">Prem Jadhav</span>
+      <span class="member-chip">Pratik Mahajan</span>
+      <span class="member-chip">Dolly Kadukar</span>
+      <span class="member-chip">Shagun Deora</span>
+      <span class="member-chip">Divya Jyothi</span>
+      <span class="member-chip">Pallavi Singh</span>
+      <span class="member-chip">Rishabh Mishra</span>
+      <span class="member-chip">Aatif</span>
+      <span class="member-chip">Shreyas Katkar</span>
+    </div>
+  </div>
+
+  <div class="team-card tm-orange">
+    <div class="team-header">
+      <div class="team-name">🔥 Squad Bolt</div>
+      <div class="team-count">8 members</div>
+    </div>
+    <div class="team-depts">CX + Channel + Engineering + Sales</div>
+    <div class="team-members">
+      <span class="member-chip">Zack</span>
+      <span class="member-chip">Ali Akbar</span>
+      <span class="member-chip">Anoop S Kumar</span>
+      <span class="member-chip">Pranit Jadhav</span>
+      <span class="member-chip">Krushna Belapurkar</span>
+      <span class="member-chip">Harshit Gupta</span>
+      <span class="member-chip">Faizal</span>
+      <span class="member-chip">Kishore NB</span>
+    </div>
+  </div>
+
+  <div class="team-card tm-pink">
+    <div class="team-header">
+      <div class="team-name">🎯 Squad Apex</div>
+      <div class="team-count">9 members</div>
+    </div>
+    <div class="team-depts">Engineering + Growth + Product + Sales + CX</div>
+    <div class="team-members">
+      <span class="member-chip">Shishir</span>
+      <span class="member-chip">Neerajprasad Singh</span>
+      <span class="member-chip">Ankit Pandey</span>
+      <span class="member-chip">Mansi Garg</span>
+      <span class="member-chip">Koushik Narendar</span>
+      <span class="member-chip">Vrushank Timbadia</span>
+      <span class="member-chip">Ritik Bansal</span>
+      <span class="member-chip">Archit Kapoor</span>
+      <span class="member-chip">Bhakti Karkera</span>
+    </div>
+  </div>
+
+  <div class="rule">
+    <div class="rule-icon">🎤</div>
+    <div>
+      <div class="rule-title">Graduation Showcase — Day 30</div>
+      <div class="rule-desc">On the final day, every person presents their problem statement solution — what they picked, how they solved it with AI, and the impact. 60 seconds each. In All Hands. Not a presentation — just a real story. "Here's what changed."</div>
+    </div>
+  </div>
+</div>
+
+<!-- =========== TIMELINE =========== -->
+<div class="section">
+  <div class="section-tag">05 — Timeline</div>
+  <h2>30 days. 10 minutes. Zero excuses.</h2>
+
+  <table class="score-table">
+    <thead>
+      <tr><th>When</th><th>What Happens</th><th>Where</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Day 0</td><td>Program launch + everyone signs up on the platform</td><td>All Hands</td></tr>
+      <tr><td>Week 1</td><td>First Steps — learn to talk to AI + pick your problem statement</td><td>Platform + Slack</td></tr>
+      <tr><td>Week 2</td><td>Daily Workflows — apply AI to your real job</td><td>Platform + Slack</td></tr>
+      <tr><td>Week 3</td><td>Build & Automate — create your AI solution</td><td>Platform + Slack</td></tr>
+      <tr><td>Week 4</td><td>Level Up & Share — polish and present your AI win</td><td>Platform + Slack</td></tr>
+      <tr><td>Day 30</td><td>Graduation Showcase — problem statement solutions in All Hands</td><td>All Hands</td></tr>
+      <tr><td>Ongoing</td><td>AI becomes part of how TranZact works. Not a program — a habit.</td><td>Everywhere</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- =========== SUPPORT =========== -->
+<div class="section">
+  <div class="section-tag">06 — Support</div>
+  <h2>You won't get stuck. We won't let you.</h2>
+
+  <ul>
+    <li><strong>Slack Channel:</strong> #ai-mojo — ask anything, share wins, post screenshots of cool AI outputs</li>
+    <li><strong>AI Champions:</strong> 1 volunteer per department who's slightly ahead — they help teammates who are stuck</li>
+    <li><strong>Weekly Office Hours:</strong> 30-minute optional sessions for anyone who wants hands-on help</li>
+    <li><strong>Recommended Tools:</strong> Claude, Codex, and ChatGPT — these are your go-to AI tools for the program</li>
+    <li><strong>Leadership Check-ins:</strong> Department heads will review progress weekly — not to judge, but to unblock</li>
+  </ul>
+</div>
+
+<!-- =========== REAL TALK =========== -->
+<div class="section">
+  <div class="section-tag">07 — Real Talk</div>
+  <h2>Answering the questions you're thinking but not asking.</h2>
+
+  <div class="narrative">
+    <p><strong>"I'm not technical. Is this for me?"</strong><br>
+    Especially for you. This program was designed for non-technical people. If you can type a message on WhatsApp, you can do this. Some of the best AI users at other companies are in Sales, HR, and Operations — not Engineering.</p>
+
+    <p><strong>"I don't have 10 minutes."</strong><br>
+    Yes you do. You spent more than 10 minutes today on something that AI could have done in 30 seconds. This program will literally give you time back. The ROI on 10 minutes is hours saved per week.</p>
+
+    <p><strong>"Will AI replace my job?"</strong><br>
+    No. But <em>someone who knows how to use AI might.</em> That's exactly why we're investing in this for everyone. The goal is to make you irreplaceable, not replaceable.</p>
+
+    <p><strong>"What if I fall behind?"</strong><br>
+    The exercises are cumulative but forgiving. Miss a day? Do two the next day. Miss a week? Your buddy and your AI Champion will pull you back in. Nobody gets left behind.</p>
+
+    <p><strong>"How do I pick a problem statement?"</strong><br>
+    Think about what annoys you most at work. What takes too long? What's repetitive? What makes you think <em>"there has to be a better way"</em>? That's your problem statement. Check the samples above for inspiration.</p>
+
+    <p><strong>"Is this mandatory?"</strong><br>
+    Let's put it this way: <em>this is the company investing in your growth for free, on company time, with full support.</em> The only question is why wouldn't you?</p>
+  </div>
+</div>
+
+<!-- =========== CTA =========== -->
+<div class="section" style="border-top:none;padding-top:0">
+  <div class="cta-box">
+    <h3>Ready to start? Sign up now.</h3>
+    <p>Log in to the platform, pick your problem statement, and start your 30-day journey to becoming AI-native.</p>
+    <a href="https://tz-claude-skillip.azurewebsites.net/dashboard" class="cta-link" target="_blank">Go to Claude Team 5K →</a>
+  </div>
+</div>
+
+<!-- =========== CLOSING QUOTE =========== -->
+<div class="section" style="border-top:none;padding-top:0">
+  <div class="quote-block">
+    <div class="quote-text">The best time to learn AI was last year.<br>The second best time is <em>today.</em></div>
+    <div class="quote-attr">Your 30-day countdown starts now</div>
+  </div>
+</div>
+
+<!-- =========== FOOTER =========== -->
+<div class="footer">
+  <div class="footer-big">44 people. 30 days. One company that's ready for what's next.</div>
+  <div class="footer-sub">Powered by Claude Team 5K — Upskill & Become AI Native</div>
+  <div class="footer-logo">TranZact — AI Upskill Program — 2026</div>
+</div>
+
+</div>
+</body>
+</html>
